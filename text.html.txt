@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Form – Green Thumb Backyard Co.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c5f2d;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #3c8f3d;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-section {
+            margin-top: 20px;
+        }
+
+        .form-instructions {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Validation Styles */
+        .input-error {
+            border-color: red;
+        }
+
+        .input-success {
+            border-color: green;
+        }
+
+        /* Fix the alignment issue with the Select2 dropdown */
+        .select2-container {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .select2-selection__arrow {
+            height: 42px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
+
+    <!-- Include jQuery and Select2 for searchable dropdown functionality -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Service Request Form – Green Thumb Backyard Co.</h2>
+    <p class="form-instructions">
+        Please complete the form below, and we will contact you to discuss your gardening and lawn care needs. 
+        We offer services such as Lawn Mowing, Garden Clean-Ups, Pruning, Tree Services, and more. 
+        <br><br>
+        <strong>Note:</strong> We only service metro Melbourne suburbs. 
+        Our team aims to respond to your request within 1 business day. For urgent inquiries, feel free to call us at 0421 455 995.
+    </p>
+
+    <form action="/submit-service-request" method="post">
+        <!-- Participant Details and Location Section -->
+        <div class="form-section" id="participant_section">
+            <h3>Participant Details & Location</h3>
+            <label for="participant_name">Full Name <span class="optional">(Optional if contacting Support Coordinator)</span></label>
+            <input type="text" id="participant_name" name="participant_name">
+
+            <label for="participant_phone">Phone</label>
+            <input type="tel" id="participant_phone" name="participant_phone" placeholder="e.g., 0421 455 995" pattern="^04\d{8}$" required>
+
+            <label for="participant_email">Email</label>
+            <input type="email" id="participant_email" name="participant_email" required>
+
+            <label for="location">Location or Postcode</label>
+            <select id="location" name="location" class="select2-dropdown" required>
+                <option value="">-- Select a postcode --</option>
+                <!-- Full Metro Melbourne Postcodes and Suburbs List -->
+                <option value="3000">3000 – Melbourne</option>
+                <option value="3001">3001 – Melbourne (St Kilda Road Central)</option>
+                <option value="3002">3002 – East Melbourne</option>
+                <option value="3003">3003 – West Melbourne</option>
+                <option value="3004">3004 – Melbourne (St Kilda Road)</option>
+                <option value="3005">3005 – World Trade Centre</option>
+                <option value="3006">3006 – Southbank</option>
+                <option value="3008">3008 – Docklands</option>
+                <option value="3010">3010 – University of Melbourne</option>
+                <option value="3011">3011 – Footscray</option>
+                <option value="3012">3012 – Brooklyn, Kingsville, Tottenham</option>
+                <option value="3013">3013 – Yarraville</option>
+                <option value="3015">3015 – Newport, Williamstown</option>
+                <option value="3016">3016 – Williamstown</option>
+                <option value="3017">3017 – Altona</option>
+                <option value="3018">3018 – Altona, Seaholme</option>
+                <option value="3019">3019 – Braybrook</option>
+                <option value="3020">3020 – Sunshine, Albion</option>
+                <option value="3021">3021 – St Albans, Kealba, Kings Park</option>
+                <option value="3022">3022 – Ardeer</option>
+                <option value="3023">3023 – Caroline Springs, Burnside</option>
+                <option value="3024">3024 – Werribee</option>
+                <option value="3030">3030 – Werribee, Point Cook</option>
+                <option value="3031">3031 – Kensington, Flemington</option>
+                <option value="3032">3032 – Maribyrnong, Ascot Vale</option>
+                <option value="3033">3033 – Keilor East</option>
+                <option value="3034">3034 – Keilor</option>
+                <option value="3035">3035 – Avondale Heights</option>
+                <option value="3036">3036 – Keilor Lodge</option>
+                <option value="3037">3037 – Sydenham</option>
+                <option value="3038">3038 – Taylors Lakes</option>
+                <option value="3039">3039 – Moonee Ponds</option>
+                <option value="3040">3040 – Essendon</option>
+                <option value="3041">3041 – Strathmore</option>
+                <option value="3042">3042 – Airport West</option>
+                <option value="3043">3043 – Gladstone Park</option>
+                <option value="3044">3044 – Pascoe Vale</option>
+                <option value="3045">3045 – Melbourne Airport</option>
+                <option value="3046">3046 – Glenroy</option>
+                <option value="3047">3047 – Broadmeadows</option>
+                <option value="3048">3048 – Coolaroo</option>
+                <option value="3049">3049 – Tullamarine</option>
+                <option value="3050">3050 – Royal Melbourne Hospital</option>
+                <option value="3051">3051 – North Melbourne</option>
+                <option value="3052">3052 – Parkville</option>
+                <option value="3053">3053 – Carlton</option>
+                <option value="3054">3054 – Princes Hill</option>
+                <option value="3055">3055 – Brunswick West</option>
+                <option value="3056">3056 – Brunswick</option>
+                <option value="3057">3057 – Coburg</option>
+                <option value="3058">3058 – Coburg North</option>
+                <option value="3059">3059 – Greenvale</option>
+                <option value="3060">3060 – Fawkner</option>
+                <option value="3061">3061 – Campbellfield</option>
+                <option value="3062">3062 – Somerton</option>
+                <option value="3063">3063 – Oaklands Junction</option>
+                <option value="3064">3064 – Craigieburn</option>
+                <!-- Add more postcodes as needed -->
+            </select>
+            <p class="note">Please note, we only service metro Melbourne suburbs.</p>
+        </div>
+
+        <!-- Service Interest Section -->
+        <div class="form-section">
+            <h3>What services are you interested in?</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="services[]" value="Lawn Mowing & Care"> Lawn Mowing & Care</label>
+                <p class="note">Regular or one-time lawn mowing services.</p>
+
+                <label><input type="checkbox" name="services[]" value="Garden Clean-Ups & Waste Removal"> Garden Clean-Ups & Waste Removal</label>
+                <p class="note">Seasonal clean-ups and debris removal.</p>
+
+                <label><input type="checkbox" name="services[]" value="Weed Control & Prevention"> Weed Control & Prevention</label>
+                <p class="note">Options for chemical-free weed control.</p>
+
+                <label><input type="checkbox" name="services[]" value="Turf Installation & Lawn Restoration"> Turf Installation & Lawn Restoration</label>
+                <p class="note">Real or artificial turf installation.</p>
+
+                <label><input type="checkbox" name="services[]" value="Pruning & Hedge Trimming"> Pruning & Hedge Trimming</label>
+                <p class="note">Regular trimming to keep plants healthy.</p>
+
+                <label><input type="checkbox" name="services[]" value="Tree Services"> Tree Services</label>
+                <p class="note">Safe tree removal or trimming for safety reasons.</p>
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="form-section">
+            <h3>Any additional information about the service request?</h3>
+            <label for="additional_info">Please let us know any specific details or requirements:</label>
+            <textarea id="additional_info" name="additional_info" rows="4"></textarea>
+        </div>
+
+        <!-- How will you be accessing services? Section -->
+        <div class="form-section radio-group">
+            <h3>How will you be accessing our services?</h3>
+            <label><input type="radio" name="accessing_services" value="Through NDIS funding" required> Through NDIS funding</label>
+            <label><input type="radio" name="accessing_services" value="As a private customer"> As a private customer</label>
+        </div>
+
+        <!-- Contact Preference Section -->
+        <div class="form-section radio-group">
+            <h3>Who should we contact?</h3>
+            <label><input type="radio" id="contact_participant" name="contact_preference" value="Contact participant directly" required> Contact participant directly</label>
+            <label><input type="radio" id="contact_coordinator" name="contact_preference" value="Contact support coordinator"> Contact support coordinator</label>
+        </div>
+
+        <!-- Support Coordinator Details (Hidden unless Contact Coordinator is selected) -->
+        <div id="support_coordinator_details" class="hidden">
+            <h3>Support Coordinator Details</h3>
+            <label for="coordinator_name">Full Name *</label>
+            <input type="text" id="coordinator_name" name="coordinator_name" required>
+
+            <label for="coordinator_organisation">Organisation</label>
+            <input type="text" id="coordinator_organisation" name="coordinator_organisation">
+
+            <label for="coordinator_phone">Phone *</label>
+            <input type="tel" id="coordinator_phone" name="coordinator_phone" required>
+
+            <label for="coordinator_email">Email *</label>
+            <input type="email" id="coordinator_email" name="coordinator_email" required>
+        </div>
+
+        <!-- Confirmation Checkbox -->
+        <div class="form-section">
+            <label><input type="checkbox" name="confirmation" required> I confirm that the information provided is correct, and I agree to be contacted by Green Thumb Backyard Co. regarding my service request.</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Service Request</button>
+    </form>
+
+    <!-- How Did You Hear About Us Section (Post-Submission) -->
+    <div class="form-section hidden" id="post_submission">
+        <h3>How did you hear about us?</h3>
+        <select id="referral_source" name="referral_source">
+            <option value="">-- Please choose --</option>
+            <option value="Google">Google</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Referral">Referral from friend or colleague</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success_message" class="hidden">
+        <h3>Thank you for submitting your request!</h3>
+        <p>We will be in touch with you within 1 business day to discuss your service needs.</p>
+    </div>
+
+</div>
+
+<script>
+    // Initialize searchable dropdown
+    $(document).ready(function() {
+        $('.select2-dropdown').select2({
+            placeholder: "Select a postcode",
+            allowClear: true
+        });
+    });
+
+    // Show/Hide Support Coordinator fields based on contact preference
+    const contactCoordinator = document.getElementById('contact_coordinator');
+    const contactParticipant = document.getElementById('contact_participant');
+    const supportCoordinatorDetails = document.getElementById('support_coordinator_details');
+
+    contactCoordinator.addEventListener('change', function() {
+        if (contactCoordinator.checked) {
+            supportCoordinatorDetails.classList.remove('hidden');
+        }
+    });
+
+    contactParticipant.addEventListener('change', function() {
+        if (contactParticipant.checked) {
+            supportCoordinatorDetails.classList.add('hidden');
+        }
+    });
+
+    // Real-time validation for phone and email
+    const phoneField = document.getElementById('participant_phone');
+    const emailField = document.getElementById('participant_email');
+
+    phoneField.addEventListener('input', function() {
+        if (phoneField.validity.valid) {
+            phoneField.classList.remove('input-error');
+            phoneField.classList.add('input-success');
+        } else {
+            phoneField.classList.remove('input-success');
+            phoneField.classList.add('input-error');
+        }
+    });
+
+    emailField.addEventListener('input', function() {
+        if (emailField.validity.valid) {
+            emailField.classList.remove('input-error');
+            emailField.classList.add('input-success');
+        } else {
+            emailField.classList.remove('input-success');
+            emailField.classList.add('input-error');
+        }
+    });
+
+    // Show success message on form submission
+    const submitButton = document.querySelector('button[type="submit"]');
+    const form = document.querySelector('form');
+    const successMessage = document.getElementById('success_message');
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Simulating form submission
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+    });
+</script>
+
+</body>
+</html>
